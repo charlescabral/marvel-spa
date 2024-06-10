@@ -7,7 +7,7 @@ const App: FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/marvel-spa/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/character/:id" element={<Details />} />
       </Routes>
     </Router>
