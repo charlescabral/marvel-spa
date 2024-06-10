@@ -7,8 +7,8 @@ const App: FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/character/:id" element={<Details />} />
+        <Route path="/marvel-spa/" element={<Home />} />
+        <Route path="/marvel-spa/character/:id" element={<Details />} />
       </Routes>
     </Router>
   )
