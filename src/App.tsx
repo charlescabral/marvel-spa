@@ -5,7 +5,7 @@ import { Home, Details } from './pages'
 
 const App: FC = () => {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/marvel-spa/" element={<Home />} />
         <Route path="/marvel-spa/character/:id" element={<Details />} />
