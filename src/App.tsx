@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
-import { Home, Details } from './pages'
+import { Home, Details } from '@/pages'
 
 const App: FC = () => {
   return (
