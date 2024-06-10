@@ -1,14 +1,14 @@
 import { FC } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import { Home, Details } from './pages'
 
 const App: FC = () => {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router>
       <Routes>
-        <Route path="/marvel-spa/" element={<Home />} />
-        <Route path="/marvel-spa/character/:id" element={<Details />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/character/:id" element={<Details />} />
       </Routes>
     </Router>
   )
