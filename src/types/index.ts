@@ -219,9 +219,3 @@ export interface CharacterResponse {
     etag: string
   }
 }
-
-export interface ListItem {
-  label: string
-  icon: string
-  value: string
-}

@@ -3,7 +3,7 @@
 import { FC, useContext, useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { CharacterDetailsContext } from '@/context'
-import { Search, Character, Comic } from '@/components'
+import { Search, Character, Comic, LoaderIcon } from '@/components'
 import { useFormatIso } from '@/utils'
 
 import brand from '/logo_menor.svg'
@@ -19,7 +19,7 @@ const Details: FC = () => {
     return <div>Heroi não encontrado</div>
   }
 
-  const { character, comics, loading, error, fetchCharacterDetails } = context
+  const { character, comics, loading, fetchCharacterDetails } = context
 
   useEffect(() => {
     const fetchInitialCharacter = async () => {
@@ -62,10 +62,10 @@ const Details: FC = () => {
         </div>
       </header>
       <div className="container">
-        {loading ? (
-          <div>Loading...</div>
-        ) : error ? (
-          <div>{error}</div>
+        {loading || !character ? (
+          <div className="center" style={{ padding: '4rem 0' }}>
+            <LoaderIcon size={62} />
+          </div>
         ) : (
           character && (
             <section>

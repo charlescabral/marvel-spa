@@ -12,22 +12,23 @@ const Character: FC<CharacterProps> = ({
   lastComicDate
 }) => {
   return (
-    <section className="grid-detail gap-14">
-      <div className="flex gap-10 text-left ">
+    <section className="grid-detail">
+      <div className="bgName">{name}</div>
+      <div className="flex gap-14 text-left z-10">
         <div className="between gap-5">
           <h1 className="font-xl">{name}</h1>
           <Favorite id={id} size={32} className="text-primary" />
         </div>
         <p>{description}</p>
-        <ul className="flex-row gap-5">
-          <li>
+        <ul className="flex-row gap-14">
+          <li className="flex gap-5">
             <b>Quadrinhos</b>
             <div className="flex-row gap-5">
               <BookIcon className="text-primary" />
               {comics.available}
             </div>
           </li>
-          <li>
+          <li className="flex gap-5">
             <b>Filmes</b>
             <div className="flex-row gap-5">
               <CineIcon className="text-primary" />
@@ -35,14 +36,14 @@ const Character: FC<CharacterProps> = ({
             </div>
           </li>
         </ul>
-        <div>
-          <b>Rating</b>: <Rating />
+        <div className="flex-row gap-5">
+          <b>Rating:</b> <Rating />
         </div>
         <div>
           <b>Último quadrinho</b>: {lastComicDate}
         </div>
       </div>
-      <div>
+      <div className="z-10">
         <div className="image">
           <img src={`${thumbnail.path}.${thumbnail.extension}`} alt={name} />
         </div>

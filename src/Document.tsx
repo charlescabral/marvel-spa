@@ -12,6 +12,7 @@ const App: FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/heroi/:id" element={<Details />} />
           </Routes>
+          <footer />
         </Router>
       </CharacterDetailsProvider>
     </CharactersProvider>

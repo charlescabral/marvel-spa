@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useCharacters } from '@/context'
 import { GetCharactersParams } from '@/types'
 import {
@@ -9,20 +9,21 @@ import {
   OrderSwitch,
   HeroIcon,
   HeartFillIcon,
-  HeartStrokeIcon
+  HeartStrokeIcon,
+  LoaderIcon
 } from '@/components/'
 import { usePluralize } from '@/utils'
 
 import brand from '/logo.svg'
 
 const Home: FC = () => {
+  const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const {
     characters,
     filteredCharacters,
     count,
     loading,
-    error,
     params,
     fetchCharacters,
     filterFavorites
@@ -30,6 +31,7 @@ const Home: FC = () => {
   const [showFavorites, setShowFavorites] = useState(false)
 
   const updateCharacters = (newParams: GetCharactersParams) => {
+    navigate({ search: '' })
     fetchCharacters({ ...params, ...newParams })
   }
 
@@ -42,7 +44,7 @@ const Home: FC = () => {
 
   useEffect(() => {
     const params: GetCharactersParams = Object.fromEntries([...searchParams])
-    fetchCharacters(params)
+    params && fetchCharacters(params)
   }, [searchParams])
 
   const displayedCharacters = showFavorites ? filteredCharacters : characters
@@ -76,11 +78,11 @@ const Home: FC = () => {
       <section>
         <div className="container">
           <div className="between gap-14">
-            <b className="text-grayLight">{resultText}</b>
+            <b className="text-grayLight">{!!count && resultText}</b>
             <div className="between gap-14">
               <div className="between gap-5 text-primary">
                 <span className="align-center">
-                  <HeroIcon size={32} />
+                  <HeroIcon size={34} />
                   Ordenar por nome - A/Z
                 </span>
                 <OrderSwitch
@@ -104,9 +106,9 @@ const Home: FC = () => {
 
       <div className="container">
         {loading ? (
-          <div>Loading...</div>
-        ) : error ? (
-          <div>{error}</div>
+          <div className="center" style={{ padding: '4rem 0' }}>
+            <LoaderIcon size={62} />
+          </div>
         ) : (
           <List characters={displayedCharacters} />
         )}

@@ -23,7 +23,7 @@ const initialState: State = {
   characters: [],
   filteredCharacters: [],
   count: 0,
-  loading: false,
+  loading: true,
   error: null,
   params: { limit: 20, offset: 0 },
   favorites: JSON.parse(localStorage.getItem('favorites') || '[]')
