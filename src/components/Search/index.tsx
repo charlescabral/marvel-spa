@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { SearchIcon } from '@/components/'
+import { SearchIcon, SearchMiniIcon } from '@/components/'
 import { SearchProps } from '@/types/'
 
 const Search: FC<SearchProps> = ({
@@ -18,12 +18,15 @@ const Search: FC<SearchProps> = ({
   }
 
   return (
-    <div
-      className={`search ${variation}`}
-      style={{ display: 'flex', alignItems: 'center' }}
-    >
-      <SearchIcon />
+    <div className={`search search-${variation}`}>
+      {variation === 'default' ? (
+        <SearchMiniIcon className="icon" />
+      ) : (
+        <SearchIcon className="icon" size={30} />
+      )}
+
       <input
+        className="input"
         type="text"
         value={query}
         onChange={handleInputChange}

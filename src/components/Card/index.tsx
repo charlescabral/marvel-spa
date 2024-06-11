@@ -9,16 +9,17 @@ const Card: FC<CardProps> = ({ character }) => {
   const imageUrl = `${thumbnail.path}.${thumbnail.extension}`
 
   return (
-    <>
-      <Favorite id={id} />
-      <Link to={`/heroi/${id}`}>
-        <img width={200} src={imageUrl} alt={name} />
-        <div className="content">
-          <h2>{name}</h2>
-          {/* Adicione outras propriedades de character conforme necessário */}
+    <Link to={`/heroi/${id}`}>
+      <div className="card">
+        <div className="card-image">
+          <img width={200} src={imageUrl} alt={name} />
         </div>
-      </Link>
-    </>
+        <div className="between gap-5">
+          <h3 className="text-base">{name}</h3>
+          <Favorite id={id} />
+        </div>
+      </div>
+    </Link>
   )
 }
 

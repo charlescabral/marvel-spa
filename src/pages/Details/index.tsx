@@ -1,8 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { CharacterDetailsContext } from '@/context'
+import { Search, Character, Comic } from '@/components'
+import { useFormatIso } from '@/utils'
+
+import brand from '/logo_menor.svg'
+import { ComicProps, GetCharactersParams } from '@/types'
 
 const Details: FC = () => {
   const { id } = useParams()
@@ -13,9 +18,7 @@ const Details: FC = () => {
     return <div>Heroi não encontrado</div>
   }
 
-  console.log('teste')
-
-  const { character, loading, error, fetchCharacterDetails } = context
+  const { character, comics, loading, error, fetchCharacterDetails } = context
 
   useEffect(() => {
     const fetchInitialCharacter = async () => {
@@ -30,9 +33,26 @@ const Details: FC = () => {
     return () => {}
   }, [])
 
+  const lastComicDate = () => {
+    if (!comics) return ''
+    const [fisrt] = comics
+    const date =
+      fisrt.dates.find((date) => date.type === 'onsaleDate')?.date || ''
+    return useFormatIso(date)
+  }
+
+  const searhCharacters = (params: GetCharactersParams) => {
+    console.log(params)
+  }
+
   return (
-    <div>
-      <h1>Detalhes do Personagem</h1>
+    <main>
+      <header>
+        <Link to={`/`}>
+          <img src={brand} className="logo" alt="Vite logo" />
+        </Link>
+        <Search onEnter={searhCharacters} />
+      </header>
       <div>
         {loading ? (
           <div>Loading...</div>
@@ -40,18 +60,21 @@ const Details: FC = () => {
           <div>{error}</div>
         ) : (
           character && (
-            <div>
-              <h2>{character.name}</h2>
-              <img
-                src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-                alt={character.name}
-              />
-              <p>{character.description}</p>
-            </div>
+            <section>
+              <Character {...character} lastComicDate={lastComicDate()} />
+              <div>
+                <h2>Últimos lançamentos</h2>
+                <div>
+                  {comics?.map((comic: ComicProps) => (
+                    <Comic {...comic} key={comic.id} />
+                  ))}
+                </div>
+              </div>
+            </section>
           )
         )}
       </div>
-    </div>
+    </main>
   )
 }
 

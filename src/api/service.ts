@@ -1,6 +1,8 @@
 import {
   CharacterProps,
   CharacterResponse,
+  ComicProps,
+  ComicResponse,
   GetCharactersParams
 } from '@/types/'
 import axios from 'axios'
@@ -67,5 +69,25 @@ export const getCharacterById = async (
       console.error('Error fetching character details:', error)
     }
     return null
+  }
+}
+
+export const getComicsByCharacterId = async (
+  characterId: string,
+  signal?: AbortSignal
+): Promise<{ results: ComicProps[]; count: number }> => {
+  try {
+    const response = await marvelApi.get<ComicResponse>(
+      `characters/${characterId}/comics`,
+      { params: { limit: 10, orderBy: '-onsaleDate' }, signal }
+    )
+    return response.data.data
+  } catch (error) {
+    if (axios.isCancel(error)) {
+      console.log('Request canceled', error.message)
+    } else {
+      console.error('Error fetching comics:', error)
+    }
+    return { results: [], count: 0 }
   }
 }

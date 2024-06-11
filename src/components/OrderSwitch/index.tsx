@@ -11,16 +11,14 @@ const OrderSwitch: FC<ToggleProps> = ({ onChange, order }) => {
   }
 
   return (
-    <button
-      style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-      onClick={handleClick}
-    >
+    <button onClick={handleClick}>
       <svg
         width="75"
         height="39"
         viewBox="0 0 75 39"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        className="fl"
       >
         <path
           d="M19.5 39L55.5 39C66.2696 39 75 30.2696 75 19.5C75 8.73045 66.2696 0 55.5 0L19.5 0C8.73045 0 0 8.73045 0 19.5C0 30.2696 8.73045 39 19.5 39Z"

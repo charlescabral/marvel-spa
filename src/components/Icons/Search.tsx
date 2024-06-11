@@ -1,9 +1,10 @@
 import { FC } from 'react'
 import { SvgProps } from '@/types'
 
-const Icon: FC<SvgProps> = ({ size = 24, color = 'red' }) => {
+const Icon: FC<SvgProps> = ({ size = 24, color = 'red', className }) => {
   return (
     <svg
+      className={className}
       width={size}
       height={size}
       viewBox="0 0 29 29"

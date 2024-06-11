@@ -23,6 +23,7 @@ export interface FavoriteProps {
 }
 
 export interface SvgProps {
+  className?: string
   size?: number
   color?: string
 }
@@ -101,6 +102,7 @@ export interface CharacterResourceProps {
 }
 
 export interface CharacterProps {
+  lastComicDate: string
   id: number
   name: string
   description: string
@@ -136,6 +138,60 @@ export interface CharacterProps {
   urls: { type: string; url: string }[]
 }
 
+export interface ComicProps {
+  id: number
+  title: string
+  description: string
+  modified: string
+  thumbnail: {
+    path: string
+    extension: string
+  }
+  resourceURI: string
+  series: {
+    resourceURI: string
+    name: string
+  }
+  variants: { resourceURI: string; name: string }[]
+  collections: { resourceURI: string; name: string }[]
+  collectedIssues: { resourceURI: string; name: string }[]
+  dates: { type: string; date: string }[]
+  prices: { type: string; price: number }[]
+  creators: {
+    available: number
+    collectionURI: string
+    items: { resourceURI: string; name: string; role: string }[]
+    returned: number
+  }
+  characters: {
+    available: number
+    collectionURI: string
+    items: { resourceURI: string; name: string }[]
+    returned: number
+  }
+  stories: {
+    available: number
+    collectionURI: string
+    items: { resourceURI: string; name: string; type: string }[]
+    returned: number
+  }
+  events: {
+    available: number
+    collectionURI: string
+    items: { resourceURI: string; name: string }[]
+    returned: number
+  }
+}
+
+export interface ComicResponse {
+  code: number
+  status: string
+  data: {
+    results: ComicProps[]
+    count: number
+  }
+}
+
 export interface ListProps {
   characters: CharacterProps[]
 }
@@ -159,13 +215,6 @@ export interface CharacterResponse {
     results: CharacterProps[]
     etag: string
   }
-}
-
-export interface InfosProps {
-  title: string
-  description: string
-  items: { label: string; icon: string; value: string }[]
-  rating: number
 }
 
 export interface ListItem {

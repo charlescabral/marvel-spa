@@ -1,8 +1,17 @@
 import { FC, useState } from 'react'
 import { useCharacters } from '@/context'
 import { GetCharactersParams } from '@/types'
-import { List, Search, OrderSwitch } from '@/components/'
+import {
+  List,
+  Search,
+  OrderSwitch,
+  HeroIcon,
+  HeartFillIcon,
+  HeartStrokeIcon
+} from '@/components/'
 import { usePluralize } from '@/utils'
+
+import brand from '/logo.svg'
 
 const Home: FC = () => {
   const {
@@ -30,17 +39,58 @@ const Home: FC = () => {
 
   const displayedCharacters = showFavorites ? filteredCharacters : characters
 
-  const resultText = `${usePluralize('encontrado', count)} ${count} ${usePluralize('herói', count)}`
+  const resultText = `${usePluralize('Encontrado', count)} ${count} ${usePluralize('herói', count)}`
 
   return (
-    <div>
-      {resultText}
-      <button onClick={handleToggleFavorites}>
-        {showFavorites ? 'Mostrar Todos' : 'Somente Favoritos'}
-      </button>
-      <Search onEnter={updateCharacters} />
-      <OrderSwitch onChange={updateCharacters} order={params.orderBy} />
-      <div>
+    <main>
+      <header>
+        <div className="container">
+          <h1 style={{ marginBottom: '2rem' }}>
+            <img src={brand} className="logo" alt="Vite logo" />
+          </h1>
+          <div className="flex-col gap-14">
+            <div>
+              <h2 className="font-xl">Explore o Universo</h2>
+              <p>
+                Mergulhe no domínio deslumbrante de todos os personagens
+                clássicos que você ama e também aqueles que você descobrirá em
+                breve!
+              </p>
+            </div>
+            <Search onEnter={updateCharacters} variation="home" />
+          </div>
+        </div>
+      </header>
+      <section>
+        <div className="container">
+          <div className="between gap-14">
+            <b className="text-grayLight">{resultText}</b>
+            <div className="between gap-14">
+              <div className="between gap-5 text-primary">
+                <span className="align-center">
+                  <HeroIcon size={32} />
+                  Ordenar por nome - A/Z
+                </span>
+                <OrderSwitch
+                  onChange={updateCharacters}
+                  order={params.orderBy}
+                />
+              </div>
+              <div>
+                <button
+                  className="between gap-5 text-primary"
+                  onClick={handleToggleFavorites}
+                >
+                  {showFavorites ? <HeartStrokeIcon /> : <HeartFillIcon />}
+                  {showFavorites ? 'Mostrar Todos' : 'Somente Favoritos'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="container">
         {loading ? (
           <div>Loading...</div>
         ) : error ? (
@@ -49,7 +99,7 @@ const Home: FC = () => {
           <List characters={displayedCharacters} />
         )}
       </div>
-    </div>
+    </main>
   )
 }
 

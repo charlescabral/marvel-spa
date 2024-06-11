@@ -1,10 +1,12 @@
 import React, { createContext, useState, useRef } from 'react'
-import { CharacterProps, CharactersProviderProps } from '@/types/'
-import { getCharacterById } from '@/api/'
+import { CharacterProps, CharactersProviderProps, ComicProps } from '@/types/'
+import { getCharacterById, getComicsByCharacterId } from '@/api/'
 
 interface CharacterDetailsContextProps {
   character: CharacterProps | null
+  comics: ComicProps[] | null
   setCharacter: React.Dispatch<React.SetStateAction<CharacterProps | null>>
+  setComics: React.Dispatch<React.SetStateAction<ComicProps[] | null>>
   fetchCharacterDetails: (id: string) => void
   loading: boolean
   error: string | null
@@ -18,6 +20,7 @@ export const CharacterDetailsProvider: React.FC<CharactersProviderProps> = ({
   children
 }) => {
   const [character, setCharacter] = useState<CharacterProps | null>(null)
+  const [comics, setComics] = useState<ComicProps[] | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
   const abortControllerRef = useRef<AbortController | null>(null)
@@ -30,8 +33,12 @@ export const CharacterDetailsProvider: React.FC<CharactersProviderProps> = ({
     const abortController = new AbortController()
     abortControllerRef.current = abortController
     try {
-      const data = await getCharacterById(id, abortController.signal)
-      setCharacter(data)
+      const [characterData, comicsData] = await Promise.all([
+        getCharacterById(id, abortController.signal),
+        getComicsByCharacterId(id, abortController.signal)
+      ])
+      setCharacter(characterData)
+      setComics(comicsData.results)
     } catch (err) {
       setError('Failed to fetch character details')
     } finally {
@@ -41,7 +48,15 @@ export const CharacterDetailsProvider: React.FC<CharactersProviderProps> = ({
 
   return (
     <CharacterDetailsContext.Provider
-      value={{ character, setCharacter, fetchCharacterDetails, loading, error }}
+      value={{
+        character,
+        setCharacter,
+        comics,
+        setComics,
+        fetchCharacterDetails,
+        loading,
+        error
+      }}
     >
       {children}
     </CharacterDetailsContext.Provider>

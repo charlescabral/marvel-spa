@@ -1,10 +1,52 @@
 import { FC } from 'react'
-import { Flex, Typography, Toggle, Icon, Rating } from '@/components/'
-import { InfosProps } from '@/types/'
+// import { Flex, Typography, Toggle, Icon, Rating } from '@/components/'
+import { CharacterProps } from '@/types/'
+import { Favorite, BookIcon, CineIcon, Rating } from '@/components/'
 
-const Infos: FC<InfosProps> = ({ title, description, items, rating }) => {
+const Character: FC<CharacterProps> = ({
+  name,
+  thumbnail,
+  description,
+  id,
+  comics,
+  series,
+  lastComicDate
+}) => {
   return (
-    <>asda</>
+    <section>
+      <div>
+        <div>
+          <h1>{name}</h1>
+          <Favorite id={id} />
+        </div>
+        <p>{description}</p>
+        <ul>
+          <li>
+            <b>Quadrinhos</b>
+            <div>
+              <BookIcon />
+              {comics.available}
+            </div>
+          </li>
+          <li>
+            <b>Quadrinhos</b>
+            <div>
+              <CineIcon />
+              {series.available}
+            </div>
+          </li>
+        </ul>
+        <div>
+          <b>Rating</b>: <Rating />
+        </div>
+        <div>
+          <b>Último quadrinho</b>: {lastComicDate}
+        </div>
+      </div>
+      <div>
+        <img src={`${thumbnail.path}.${thumbnail.extension}`} alt={name} />
+      </div>
+    </section>
     // <Flex direction="column">
     //   <Flex>
     //     <Typography variant="h2" className="title">
@@ -48,4 +90,4 @@ const Infos: FC<InfosProps> = ({ title, description, items, rating }) => {
   )
 }
 
-export default Infos
+export default Character
