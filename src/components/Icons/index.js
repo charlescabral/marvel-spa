@@ -1,0 +1,8 @@
+export { default as BookIcon } from './Book'
+export { default as HeartFillIcon } from './HeartFill'
+export { default as HeartStrokeIcon } from './HeartStroke'
+export { default as HeroIcon } from './Hero'
+export { default as SearchIcon } from './Search'
+export { default as SearchMiniIcon } from './SearchMini'
+export { default as StarIcon } from './Star'
+export { default as CineIcon } from './Cine'

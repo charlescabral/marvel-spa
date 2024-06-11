@@ -2,10 +2,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 
-const path = {
-  src: resolve(__dirname + '/src/')
-}
-
 export default defineConfig({
   base: '/marvel-spa/',
   server: {
@@ -16,7 +12,7 @@ export default defineConfig({
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.scss', '.css'],
     alias: {
-      '@': path.src
+      '@': resolve(__dirname + '/src/')
     }
   },
   plugins: [react()]
