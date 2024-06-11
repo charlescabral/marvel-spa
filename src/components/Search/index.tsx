@@ -4,10 +4,11 @@ import { SearchProps } from '@/types/'
 
 const Search: FC<SearchProps> = ({
   onEnter,
+  value = '',
   placeholder = 'Procure por Heróis',
   variation = 'default'
 }) => {
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState(value)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value)

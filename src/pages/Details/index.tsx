@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useContext, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { CharacterDetailsContext } from '@/context'
 import { Search, Character, Comic } from '@/components'
 import { useFormatIso } from '@/utils'
@@ -13,6 +13,7 @@ const Details: FC = () => {
   const { id } = useParams()
   const context = useContext(CharacterDetailsContext)
   const [initialFetchDone, setInitialFetchDone] = useState<boolean>(false)
+  const navigate = useNavigate()
 
   if (!context) {
     return <div>Heroi não encontrado</div>
@@ -42,7 +43,10 @@ const Details: FC = () => {
   }
 
   const searhCharacters = (params: GetCharactersParams) => {
-    console.log(params)
+    const query = new URLSearchParams(
+      params as Record<string, string>
+    ).toString()
+    navigate(`/?${query}`)
   }
 
   return (

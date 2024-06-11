@@ -69,6 +69,7 @@ export interface RatingProps {
 }
 
 export interface SearchProps {
+  value?: string
   onEnter: (params: GetCharactersParams) => void
   placeholder?: string
   variation?: string

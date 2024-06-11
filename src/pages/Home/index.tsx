@@ -1,4 +1,6 @@
-import { FC, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { FC, useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useCharacters } from '@/context'
 import { GetCharactersParams } from '@/types'
 import {
@@ -14,6 +16,7 @@ import { usePluralize } from '@/utils'
 import brand from '/logo.svg'
 
 const Home: FC = () => {
+  const [searchParams] = useSearchParams()
   const {
     characters,
     filteredCharacters,
@@ -37,6 +40,11 @@ const Home: FC = () => {
     }
   }
 
+  useEffect(() => {
+    const params: GetCharactersParams = Object.fromEntries([...searchParams])
+    fetchCharacters(params)
+  }, [searchParams])
+
   const displayedCharacters = showFavorites ? filteredCharacters : characters
 
   const resultText = `${usePluralize('Encontrado', count)} ${count} ${usePluralize('herói', count)}`
@@ -57,7 +65,11 @@ const Home: FC = () => {
                 breve!
               </p>
             </div>
-            <Search onEnter={updateCharacters} variation="home" />
+            <Search
+              onEnter={updateCharacters}
+              variation="home"
+              value={searchParams?.get('nameStartsWith') || ''}
+            />
           </div>
         </div>
       </header>
