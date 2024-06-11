@@ -25,7 +25,8 @@
       padding: var(--space-10) var(--space-10) var(--space-10) var(--space-20);
       background-color: var(--color-primary-light);
       color: var(--color-primary);
-      font-size: var(--font-lg);
+      font-weight: semibold;
+      font-size: 1.4rem;
 
       &::placeholder {
         color: var(--color-primary-text);

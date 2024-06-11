@@ -57,19 +57,21 @@ const Details: FC = () => {
           </div>
         </div>
       </header>
-      <div>
+      <div className="container">
         {loading ? (
           <div>Loading...</div>
         ) : error ? (
           <div>{error}</div>
         ) : (
           character && (
-            <section className="container">
+            <section>
               <div className="flex gap-14">
                 <Character {...character} lastComicDate={lastComicDate()} />
                 {!!comics?.length && (
                   <div className="text-left">
-                    <h2>Últimos lançamentos</h2>
+                    <h2 className="font-lg" style={{ marginBottom: '2rem' }}>
+                      Últimos lançamentos
+                    </h2>
                     <div className="grid-list grid-list-5">
                       {comics?.map((comic: ComicProps) => (
                         <Comic {...comic} key={comic.id} />
