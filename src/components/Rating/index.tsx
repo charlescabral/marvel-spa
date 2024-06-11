@@ -8,7 +8,7 @@ const Rating: FC = () => {
     stars.push(<StarIcon key={i} />)
   }
 
-  return <div>{stars}</div>
+  return <div className="text-primary flex-row gap-2">{stars}</div>
 }
 
 export default Rating

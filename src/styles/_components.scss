@@ -1,30 +1,26 @@
 .search {
   position: relative;
-  margin: 0 auto;
+  min-width: 60%;
 
   .input {
-    padding: var(--space-6) var(--space-4) var(--space-6) var(--space-16);
+    padding: var(--space-8) var(--space-8) var(--space-8) var(--space-16);
     border: 1px solid transparent;
     border-radius: var(--radii-lg);
-    font-size: 14px;
+    font-size: var(--font-md);
     width: 100%;
 
     &:focus {
       outline: none;
-      // border-color: #007bff;
-      // box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
   }
 
   .icon {
     position: absolute;
-    left: var(--space-5);
-    top: var(--space-5);
+    left: var(--space-8);
+    top: var(--space-8);
   }
 
   &-home {
-    min-width: 60%;
-
     .input {
       padding: var(--space-10) var(--space-10) var(--space-10) var(--space-20);
       background-color: var(--color-primary-light);
@@ -49,26 +45,29 @@
 
 .card {
   &:hover {
-    .card-image {
+    .image {
       transform: scale(1.05);
     }
   }
-
-  &-image {
-    overflow: hidden;
-    width: 100%;
+  .image {
     height: 300px;
-    border-radius: var(--radii);
-    position: relative;
-    transition: transform 0.3s;
     border-bottom: solid 0.5rem var(--color-primary);
+  }
+}
 
-    & img {
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      object-fit: cover;
-    }
+.image {
+  overflow: hidden;
+  width: 100%;
+  border-radius: var(--radii-md);
+  position: relative;
+  transition: transform 0.3s;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    float: left;
   }
 }

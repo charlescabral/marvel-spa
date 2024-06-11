@@ -3,7 +3,7 @@ import { FavoriteProps } from '@/types/'
 import { HeartFillIcon, HeartStrokeIcon } from '@/components'
 import { useCharacters } from '@/context'
 
-const Favorite: FC<FavoriteProps> = ({ id }) => {
+const Favorite: FC<FavoriteProps> = ({ id, size = 20, className }) => {
   const { toggleFavorite, favorites } = useCharacters()
   const isFavorite = favorites.includes(id)
   const [checked, setChecked] = useState<boolean | undefined>(isFavorite)
@@ -17,10 +17,15 @@ const Favorite: FC<FavoriteProps> = ({ id }) => {
 
   return (
     <button
+      className={className}
       style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
       onClick={handleClick}
     >
-      {checked ? <HeartFillIcon /> : <HeartStrokeIcon />}
+      {checked ? (
+        <HeartFillIcon size={size} />
+      ) : (
+        <HeartStrokeIcon size={size} />
+      )}
     </button>
   )
 }

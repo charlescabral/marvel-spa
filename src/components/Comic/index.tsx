@@ -8,9 +8,11 @@ const Comic: FC<ComicProps> = ({ thumbnail, title, id }) => {
 
   return (
     <Link to={`/heroi/${id}`}>
-      <img width={200} src={imageUrl} alt={title} />
-      <div className="content">
-        <h3>{title}</h3>
+      <div className="image">
+        <img width={200} src={imageUrl} alt={title} />
+      </div>
+      <div className="between gap-5">
+        <h3 className="text-base">{title}</h3>
       </div>
     </Link>
   )

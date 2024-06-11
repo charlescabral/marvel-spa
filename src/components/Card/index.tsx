@@ -11,7 +11,7 @@ const Card: FC<CardProps> = ({ character }) => {
   return (
     <Link to={`/heroi/${id}`}>
       <div className="card">
-        <div className="card-image">
+        <div className="image">
           <img width={200} src={imageUrl} alt={name} />
         </div>
         <div className="between gap-5">

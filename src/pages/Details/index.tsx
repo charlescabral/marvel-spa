@@ -37,7 +37,7 @@ const Details: FC = () => {
     if (!comics) return ''
     const [fisrt] = comics
     const date =
-      fisrt.dates.find((date) => date.type === 'onsaleDate')?.date || ''
+      fisrt?.dates.find((date) => date.type === 'onsaleDate')?.date || ''
     return useFormatIso(date)
   }
 
@@ -46,12 +46,16 @@ const Details: FC = () => {
   }
 
   return (
-    <main>
+    <main className="bg-primary-light">
       <header>
-        <Link to={`/`}>
-          <img src={brand} className="logo" alt="Vite logo" />
-        </Link>
-        <Search onEnter={searhCharacters} />
+        <div className="container">
+          <div className="start gap-14">
+            <Link to={`/`}>
+              <img src={brand} className="logo" alt="Vite logo" />
+            </Link>
+            <Search onEnter={searhCharacters} />
+          </div>
+        </div>
       </header>
       <div>
         {loading ? (
@@ -60,15 +64,19 @@ const Details: FC = () => {
           <div>{error}</div>
         ) : (
           character && (
-            <section>
-              <Character {...character} lastComicDate={lastComicDate()} />
-              <div>
-                <h2>Últimos lançamentos</h2>
-                <div>
-                  {comics?.map((comic: ComicProps) => (
-                    <Comic {...comic} key={comic.id} />
-                  ))}
-                </div>
+            <section className="container">
+              <div className="flex gap-14">
+                <Character {...character} lastComicDate={lastComicDate()} />
+                {!!comics?.length && (
+                  <div className="text-left">
+                    <h2>Últimos lançamentos</h2>
+                    <div className="grid-list grid-list-5">
+                      {comics?.map((comic: ComicProps) => (
+                        <Comic {...comic} key={comic.id} />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </section>
           )

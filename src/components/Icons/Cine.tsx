@@ -1,7 +1,11 @@
 import { FC } from 'react'
 import { SvgProps } from '@/types'
 
-const Icon: FC<SvgProps> = ({ size = 24, color = 'currentColor' }) => {
+const Icon: FC<SvgProps> = ({
+  size = 24,
+  color = 'currentColor',
+  className
+}) => {
   return (
     <svg
       width={size}
@@ -9,6 +13,7 @@ const Icon: FC<SvgProps> = ({ size = 24, color = 'currentColor' }) => {
       viewBox="0 0 30 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <g clipPath="url(#clip0_1_27)">
         <path

@@ -20,6 +20,8 @@ export interface GridProps {
 
 export interface FavoriteProps {
   id: number
+  size?: number
+  className?: string
 }
 
 export interface SvgProps {

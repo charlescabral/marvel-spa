@@ -20,7 +20,7 @@ const Search: FC<SearchProps> = ({
   return (
     <div className={`search search-${variation}`}>
       {variation === 'default' ? (
-        <SearchMiniIcon className="icon" />
+        <SearchMiniIcon className="icon text-primary" size={22} />
       ) : (
         <SearchIcon className="icon" size={30} />
       )}
