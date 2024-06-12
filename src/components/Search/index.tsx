@@ -15,8 +15,7 @@ const Search: FC<SearchProps> = ({
   }
 
   const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' || e.key === 'Backspace')
-      onEnter({ nameStartsWith: query || null })
+    if (e.key === 'Enter') onEnter({ nameStartsWith: query || null })
   }
 
   return (
