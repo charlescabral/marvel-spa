@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { CharacterProps } from '@/types/'
 import { Favorite, BookIcon, CineIcon, Rating } from '@/components/'
 
@@ -11,6 +11,26 @@ const Character: FC<CharacterProps> = ({
   series,
   lastComicDate
 }) => {
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      const bgName = document.querySelector('.bgName') as HTMLElement
+      const image = document.querySelector('.image') as HTMLElement
+
+      if (bgName) {
+        bgName.style.transform = `translateY(${scrollY * 0.4}px)`
+      }
+      if (image) {
+        image.style.transform = `translateY(${scrollY * -0.1}px)`
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
     <section className="grid-detail">
       <div className="bgName">{name}</div>

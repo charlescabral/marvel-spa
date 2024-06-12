@@ -44,7 +44,7 @@ const Home: FC = () => {
 
   useEffect(() => {
     const params: GetCharactersParams = Object.fromEntries([...searchParams])
-    params && fetchCharacters(params)
+    fetchCharacters(params)
   }, [searchParams])
 
   const displayedCharacters = showFavorites ? filteredCharacters : characters
